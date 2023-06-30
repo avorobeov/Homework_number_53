@@ -33,7 +33,7 @@ namespace Homework_number_53
                         break;
 
                     case CommandSortPatientsByAge:
-                        hospital.ShowSortedSortPatientsByAge();
+                        hospital.ShowSortedPatientsByAge();
                         break;
 
                     case CommandFindPatientsWithDisease:
@@ -100,7 +100,7 @@ namespace Homework_number_53
             ShowPatients(sortedPatients);
         }
 
-        public void ShowSortedSortPatientsByAge()
+        public void ShowSortedPatientsByAge()
         {
             List<Patient> sortedPatients = GetSortedSortPatientsByAge();
 
