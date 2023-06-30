@@ -29,11 +29,11 @@ namespace Homework_number_53
                 switch (userInput)
                 {
                     case CommandSortPatientsByFullName:
-                        hospital.SortPatientsByFullName();
+                        hospital.ShowSortedPatientsByFullName();
                         break;
 
                     case CommandSortPatientsByAge:
-                        hospital.SortPatientsByAge();
+                        hospital.ShowSortedSortPatientsByAge();
                         break;
 
                     case CommandFindPatientsWithDisease:
@@ -83,31 +83,46 @@ namespace Homework_number_53
             Fill();
         }
 
-        public void SortPatientsByFullName()
-        {
-            ShowSortedPatients(_patients.OrderBy(patient => patient.Surname)
-                                        .ThenBy(patient => patient.Name)
-                                        .ThenBy(patient => patient.Patronymic).ToList());
-        }
-
-        public void SortPatientsByAge()
-        {
-            List<Patient> sortedPatients = _patients.OrderBy(patient => patient.Age).ToList();
-
-            ShowSortedPatients(sortedPatients);
-        }
-
         public void FindPatientsWithDisease()
         {
             Console.WriteLine("Укажите заболевание по которому хотите увидеть больных:");
             string disease = Console.ReadLine();
 
-            List<Patient> sortedPatients = _patients.Where(patient => patient.Disease == disease).ToList();
+            List<Patient> sortedPatients = GetPatientsWithDisease(disease);
 
-            ShowSortedPatients(sortedPatients);
+            ShowPatients(sortedPatients);
         }
 
-        private void ShowSortedPatients(List<Patient> sortedPatients)
+        public void ShowSortedPatientsByFullName()
+        {
+            List<Patient> sortedPatients = GetSortedPatientsByFullName();
+
+            ShowPatients(sortedPatients);
+        }
+
+        public void ShowSortedSortPatientsByAge()
+        {
+            List<Patient> sortedPatients = GetSortedSortPatientsByAge();
+
+            ShowPatients(sortedPatients);
+        }
+
+        public List<Patient> GetPatientsWithDisease(string disease)
+        {
+            return _patients.Where(patient => patient.Disease == disease).ToList();
+        }
+
+        private List<Patient> GetSortedPatientsByFullName()
+        {
+            return _patients.OrderBy(patient => patient.Surname).ThenBy(patient => patient.Name).ThenBy(patient => patient.Patronymic).ToList();
+        }
+
+        private List<Patient> GetSortedSortPatientsByAge()
+        {
+            return _patients.OrderBy(patient => patient.Age).ToList();
+        }
+
+        private void ShowPatients(List<Patient> sortedPatients)
         {
             foreach (Patient patient in sortedPatients)
             {
