@@ -85,11 +85,9 @@ namespace Homework_number_53
 
         public void SortPatientsByFullName()
         {
-            List<Patient> sortedPatients = _patients.OrderBy(patient => patient.Surname)
-                                                    .ThenBy(patient => patient.Name)
-                                                    .ThenBy(patient => patient.Patronymic).ToList();
-
-            ShowSortedPatients(sortedPatients);
+            ShowSortedPatients(_patients.OrderBy(patient => patient.Surname)
+                                        .ThenBy(patient => patient.Name)
+                                        .ThenBy(patient => patient.Patronymic).ToList());
         }
 
         public void SortPatientsByAge()
